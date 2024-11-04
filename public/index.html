@@ -157,21 +157,11 @@
 
             const rect = { x: 150, y: 100, width: 275, height: 575 };
 
-            function drawHumanSilhouette() {
-                const ctx = canvas.getContext('2d');
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-              
-                ctx.beginPath();
-                ctx.moveTo(rect.x, rect.y + rect.height);
-                ctx.lineTo(rect.x, rect.y);
-                ctx.lineTo(rect.x + rect.width, rect.y);
-                ctx.lineTo(rect.x + rect.width, rect.y + rect.height);
-                ctx.lineTo(rect.x, rect.y + rect.height);
-                ctx.closePath();
-                ctx.fillStyle = 'black';
-                ctx.fill();
-              }
+            function drawRectangle() {
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 4;
+                ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+            }
 
             function areKeypointsInsideRect(keypoints) {
                 return keypoints.every((keypoint) => {
@@ -187,7 +177,7 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                drawHumanOutline();
+                drawRectangle();
 
                 const allKeypointsInside = areKeypointsInsideRect(pose.keypoints);
                 status.textContent = allKeypointsInside ? 'Correct' : 'Incorrect';
